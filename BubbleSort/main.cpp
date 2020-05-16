@@ -12,37 +12,37 @@ void printVector(const std::vector<T>& vct){
 }
 
 template<typename T>
-std::vector<T> bubbleSort(std::vector<T> src){
-    if(src.size() < 2)
-        return src;
+void bubbleSort(std::vector<T>& array){
+    if(array.size() < 2)
+        return;
     bool swaped = false;
     int count = 0;
     do{
         std::cout << "   " << QString("--%1--").arg(++count).toStdString() << std::endl;
         swaped = false;
-        for(auto it = src.begin(); (it+1) != src.end(); ++it){
+        for(auto it = array.begin(); (it+1) != array.end(); ++it){
             auto current = it;
             auto next = it + 1;
             if(*current > *next){
                 swaped = true;
                 std::swap(*current, *next);
             }
-            std::cout << "       " << QString("----%1----").arg(it - src.begin() + 1).toStdString();
-            printVector(src);
+            std::cout << "       " << QString("----%1----").arg(it - array.begin() + 1).toStdString();
+            printVector(array);
         }
     }while(swaped /*&& count < (src.size() - 1)*/);
-    return src;
+    return;
 }
 
 int main(int argc, char *argv[]){
     QCoreApplication a(argc, argv);
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf-8"));
     //使用QVector 便于打印
-    std::vector<int> src{98, 58, 56, 32, 22, 10, 1};
+    std::vector<int> array{98, 58, 56, 32, 22, 10, 1};
     std::cout << "src:";
-    printVector(src);
-    std::vector<int> dest = bubbleSort(src);
+    printVector(array);
+    bubbleSort(array);
     std::cout << "dest:";
-    printVector(dest);
+    printVector(array);
     return a.exec();
 }
